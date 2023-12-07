@@ -11,10 +11,10 @@ class Program
         Console.WriteLine("Welcome to the Chat App!");
 
         Console.Write("Enter your name: ");
-        string userName = Console.ReadLine();
+        string userName = Console.ReadLine() ?? "";
 
         Console.Write("Enter the server address (e.g., 127.0.0.1:8888): ");
-        string serverAddress = Console.ReadLine();
+        string serverAddress = Console.ReadLine() ?? "";
 
         if (string.IsNullOrEmpty(serverAddress))
         {
@@ -32,12 +32,12 @@ class Program
 
             Console.WriteLine($"Connected to server at {serverAddress}...");
 
-            Task.Run(() => ReceiveMessages(client));
+            await Task.Run(() => ReceiveMessages(client));
 
             while (true)
             {
                 Console.Write("Type a message (or 'exit' to end): ");
-                string message = Console.ReadLine();
+                string message = Console.ReadLine() ?? "";
 
                 if (message.ToLower() == "exit")
                 {
